@@ -23,26 +23,26 @@ pipeline {
             steps {
                 echo "Hello Java Express"
                 sh 'ls'
-                sh 'docker build -t  Neil5252/docker_jenkins_springboot:${BUILD_NUMBER} .'
+                sh 'docker build -t  neil5252/docker_jenkins_springboot:${BUILD_NUMBER} .'
             }
         }
         stage('Docker Login'){
             
             steps {
                  withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                    sh "docker login -u Neil5252 -p ${Dockerpwd}"
+                    sh "docker login -u neil5252 -p ${Dockerpwd}"
                 }
             }                
         }
         stage('Docker Push'){
             steps {
-                sh 'docker push Neil5252/docker_jenkins_springboot:${BUILD_NUMBER}'
+                sh 'docker push neil5252/docker_jenkins_springboot:${BUILD_NUMBER}'
             }
         }
         stage('Docker deploy'){
             steps {
                
-                sh 'docker run -itd -p  8081:8080 Neil5252/docker_jenkins_springboot:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  8081:8080 neil5252/docker_jenkins_springboot:${BUILD_NUMBER}'
             }
         }
         stage('Archving') { 
